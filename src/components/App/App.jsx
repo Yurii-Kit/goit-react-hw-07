@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from '../../redux/contactsOps';
+import {
+  selectContacts,
+  selectError,
+  selectLoading,
+} from '../../redux/contactsSlice';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
 import SearchBox from '../SearchBox/SearchBox';
@@ -8,9 +13,9 @@ import css from './App.module.css';
 
 function App() {
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts.items);
-  const loading = useSelector((state) => state.contacts.loading);
-  const error = useSelector((state) => state.contacts.error);
+  const contacts = useSelector(selectContacts);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
   useEffect(() => {
     dispatch(fetchContacts());
     // .unwrap() // додаткові повідомлення про успіх або помилку
