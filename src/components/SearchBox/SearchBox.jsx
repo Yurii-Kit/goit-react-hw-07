@@ -1,12 +1,13 @@
 import css from './SearchBox.module.css';
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
-import { changeFilter } from '../../redux/filtersSlice';
-import { useDispatch } from 'react-redux';
+import { changeFilter, selectNameFilter } from '../../redux/filtersSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function SearchBox() {
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useState('');
+  const filterNameValue = useSelector(selectNameFilter);
+  const [inputValue, setInputValue] = useState(filterNameValue);
   const [debouncedFilter] = useDebounce(inputValue, 1000);
 
   const handleFilterChange = (event) => {
@@ -15,8 +16,10 @@ export default function SearchBox() {
 
   // Використовуємо дебаунс для оновлення Redux
   useEffect(() => {
-    dispatch(changeFilter(debouncedFilter));
-  }, [debouncedFilter, dispatch]);
+    if (debouncedFilter !== filterNameValue) {
+      dispatch(changeFilter(debouncedFilter));
+    }
+  }, [debouncedFilter, dispatch, filterNameValue]);
   return (
     <div className={css.searchBox}>
       <label>
