@@ -7,7 +7,7 @@
   flex-direction: column;
   gap: 10px;
 }
-.listIteam {
+.listItem {
   display: flex;
 
   justify-content: space-between;

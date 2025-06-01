@@ -3,19 +3,19 @@ import css from './ContactList.module.css';
 import { useSelector } from 'react-redux';
 
 export default function ContactList() {
-  const listIteams = useSelector((state) => state.contacts.items);
+  const listItems = useSelector((state) => state.contacts.items);
   const filter = useSelector((state) => state.filters.name);
 
   // Фільтруємо контакти за фільтром
-  const visibleListIteams = listIteams.filter((listIteam) =>
-    listIteam.name.toLowerCase().includes(filter.toLowerCase()),
+  const visibleListIteams = listItems.filter((listItem) =>
+    listItem.name.toLowerCase().includes(filter.toLowerCase()),
   );
   return (
     <ul className={css.contactList}>
-      {visibleListIteams.map((listIteam) => {
+      {visibleListIteams.map((listItem) => {
         return (
-          <li className={css.listIteam} key={listIteam.id}>
-            <Contact listIteam={listIteam} />
+          <li className={css.listItem} key={listItem.id}>
+            <Contact listItem={listItem} />
           </li>
         );
       })}
