@@ -15,9 +15,7 @@ export default function SearchBox() {
 
   // Використовуємо дебаунс для оновлення Redux
   useEffect(() => {
-    if (debouncedFilter !== '') {
-      dispatch(changeFilter(debouncedFilter));
-    }
+    dispatch(changeFilter(debouncedFilter));
   }, [debouncedFilter, dispatch]);
   return (
     <div className={css.searchBox}>
